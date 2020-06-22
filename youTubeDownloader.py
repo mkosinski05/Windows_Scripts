@@ -2,12 +2,13 @@ from pytube import YouTube
 from pytube import Playlist
 
 import sys
+import argparse
 dwnld_ndx = 1
 
 
 def download(uri):
 	global dwnld_ndx
-	print(uri)
+	#print(uri)
 	try:
 		yt = YouTube(uri)
 		print(dwnld_ndx, yt.title)
@@ -18,9 +19,9 @@ def download(uri):
 	dwnld_ndx += 1
 		
 def download_playlist(url):
-	print(url)
+	#print(url)
 	videos = Playlist(url)
-	print (videos)
+	#print (videos)
 	#print("Number of Videos: "+ str(videos.len()))
 	for video in videos:
 		download(video)
@@ -43,9 +44,19 @@ def open_Playlist ( filename ) :
 	download_playlist(url)
 	
 if __name__ == "__main__":
-	#open_Playlist(sys.argv[1])
-	#print(sys.argv[1])
-	#download_playlist(sys.argv[1])
-	download(sys.argv[1])
+
+    parser = argparse.ArgumentParser(description='Process some options.')
+
+    parser.add_argument('-v', '--video', const=1, nargs='?', help='Specifies the url is a video(default')
+    parser.add_argument('-l', '--list', const=1, nargs='?', help='Specities the usl is a video playlist')
+    parser.add_argument('url')
+
+    args = parser.parse_args()
+    print(args.url)
+
+    if (args.list != None):
+        download_playlist(args.url)
+    else :
+        download(args.url)
 	
 	
