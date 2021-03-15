@@ -4,7 +4,7 @@
 
 ​	Python v3.6 or higher
 
-​	PyTube3 v9.6.4
+​	PyTube3 v10
 
 ```
 pip install pytube3 --upgrade
